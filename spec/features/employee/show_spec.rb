@@ -11,6 +11,7 @@ RSpec.describe("Employee Show page") do
     @ticket1 = Ticket.create!(    subject: "art",     age: 21,     open: true)
     @ticket2 = Ticket.create!(    subject: "band",     age: 23,     open: true)
     @tickemp1 = Ticketemployee.create!(    ticket_id: @ticket1.id,     employee_id: @employee1.id)
+    @tickemp2 = Ticketemployee.create!(    ticket_id: @ticket2.id,     employee_id: @employee1.id)
   end
 
   it("I see the employee's name and department name,") do
@@ -25,9 +26,9 @@ RSpec.describe("Employee Show page") do
     expect(page).to(have_content("Admission age:#{@ticket1.age}"))
   end
 
-  it(" I see that this list is ordered from oldest to youngest,") do
-  end
-
-  it("I see that this list only includes open tickets") do
+  it(" I see that this list is ordered from oldest to youngest,only includes open tickets") do
+    visit(employee_path(@employee1.id))
+    save_and_open_page
+    expect("#{@ticket2.age}").to(appear_before("#{@ticket1.age}"))
   end
 end

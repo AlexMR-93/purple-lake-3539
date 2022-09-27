@@ -1,7 +1,10 @@
 <h1>Employee Show page</h1>
 <p>Employee name:<%=@employee.name %></p>
 <p>Employee Dept:<%=@employee.department.name %></p>
-<% @employee.tickets.each do |ticket| %>
+  <% @employee.tickets.oldie_youngie. map do|ticket|  %>
+    <p>ticket age ordered:<%=ticket.age  %></p>
+    <% end %>
+  <% @employee.tickets.each do |ticket| %>
   <p>Employee ticket:<%=ticket.subject %></p>
   <p>Admission age:<%=ticket.age %></p>
-<% end %>
+  <% end %>
