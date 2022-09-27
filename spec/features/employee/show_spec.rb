@@ -28,7 +28,21 @@ RSpec.describe("Employee Show page") do
 
   it(" I see that this list is ordered from oldest to youngest,only includes open tickets") do
     visit(employee_path(@employee1.id))
-    save_and_open_page
     expect("#{@ticket2.age}").to(appear_before("#{@ticket1.age}"))
+  end
+
+  describe("story3") do
+    it("I do not see any open tickets listed that are not assigned to the employee") do
+      visit(employee_path(@employee1.id))
+    end
+
+    it("I fill in the form with the id of an open ticket that already exists in the database,Click Submit") do
+      visit(employee_path(@employee1.id))
+      click_button("Add tickect to #{@employee.name}")
+      expect(current_path).to(eq(employee_ticket_path(@employee1.id, @ticket1.id)))
+    end
+
+    it("I am redirected back to that employee's show page,I see the ticket's subject now listed") do
+    end
   end
 end
